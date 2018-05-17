@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="项目的web.xml文件      AndroidManifest.xml
+        在其中定义了各个activity的配置信息吗，如初始加载的activity
+
+        activity中的onCreate方法，相当于init（）方法
+        方法重定义了指向的布局文件，在布局文件中定义的各个组件的布局详情，
+        决定将来activity会显示成什么样子，
+        因此activity和layout就像js 和 html一样，两张搭配形成我们看到的页面"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_weight="1" />
+</LinearLayout>

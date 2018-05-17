@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_message_show"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.lenovo.helloworld.messageShow">
+
+    <Button
+        android:text="消息按钮"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notificationButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="51dp"
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/bcColor"
+        android:onClick="testNotifiaction"/>
+
+    <Button
+        android:text="提示框二"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ceshiButton"
+        android:layout_alignBaseline="@+id/notificationButton"
+        android:layout_alignBottom="@+id/notificationButton"
+        android:layout_toEndOf="@+id/notificationButton"
+        android:layout_marginStart="48dp"
+        android:onClick="ceshiButton"/>
+
+    <TextView
+        android:text="测试"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ceshi" />
+
+</RelativeLayout>
