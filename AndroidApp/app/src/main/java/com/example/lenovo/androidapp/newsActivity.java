@@ -57,7 +57,11 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
 
             @Override
             public void run() {
-
+//                try {
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
 
                 //请求网络数据
                 ArrayList<NewsBean> allNews = NewsUtils.getAllNewsForNetWork(mContext);
