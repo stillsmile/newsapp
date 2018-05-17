@@ -13,7 +13,7 @@ public class MySqliteOpenHelper extends SQLiteOpenHelper {
     public MySqliteOpenHelper(Context context) {
         //context 上下文，name 数据库文件的名称  factory 用来创建cursor对象，默认为null
         // version数据库的版本号从1开始如果发生改变onupgrade方法将被调用
-        super(context, "info1.db", null , 2);
+        super(context, "info1.db", null ,1);
     }
 
     //onCreate方法是数据库第一次创建的时候会被调用
