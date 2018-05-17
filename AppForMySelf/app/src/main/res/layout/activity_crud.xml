@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_crud"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.lenovo.appformyself.crud"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:text="id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:id="@+id/tv_id" />
+
+        <TextView
+            android:text="name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:id="@+id/tv_name" />
+
+        <TextView
+            android:text="phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:id="@+id/tv_phone" />
+    </LinearLayout>
+    <ListView
+    android:layout_width="match_parent"
+    android:layout_height="178dp"
+        android:id="@+id/lv_showUserInfo"
+        android:layout_weight="0.47" />
+
+    <Button
+        android:text="增加"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_add" />
+
+    <Button
+        android:text="删除"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_delete" />
+
+    <Button
+        android:text="改"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_update"/>
+    <Button
+        android:text="查"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_select"/>
+
+    <Button
+        android:text="新闻网络版"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_news" />
+
+    <Button
+        android:text="实时公交"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_bus" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <TextView
+            android:text="实时公交response显示"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_bus" />
+
+    </ScrollView>
+
+</LinearLayout>
