@@ -25,7 +25,7 @@
             android:text="操作数据库"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button2"
+            android:id="@+id/bt_database"
             android:layout_weight="1" />
 
         <Button

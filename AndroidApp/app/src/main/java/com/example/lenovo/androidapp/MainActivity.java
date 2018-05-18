@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button button = (Button) findViewById(R.id.bt_news);
         button.setOnClickListener(this);
+        Button bt_database = (Button) findViewById(R.id.bt_database);
+        bt_database.setOnClickListener(this);
 
 
     }
@@ -29,6 +31,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()){
             case R.id.bt_news :
+                intent.setClass(this,newsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.bt_database:
                 intent.setClass(this,newsActivity.class);
                 startActivity(intent);
                 break;
