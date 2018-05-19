@@ -67,12 +67,19 @@
         android:layout_height="0dp"
         android:layout_width="fill_parent"/>
 
-    <TextView
-        android:text="显示更新信息显示信息显示更新信息显示更新信息"
-        android:layout_weight="1"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_width="fill_parent"
-        android:id="@+id/tv_dataInfo" />
+        android:layout_weight="1">
+
+        <TextView
+            android:text="显示更新信息显示信息显示更新信息显示更新信息"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/tv_dataInfo" />
+
+    </ScrollView>
+
 
     <LinearLayout
         android:orientation="horizontal"
