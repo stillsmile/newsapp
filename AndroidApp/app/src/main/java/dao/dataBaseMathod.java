@@ -13,12 +13,12 @@ import bean.NewsBean;
  * Created by user on 2018/5/18.
  */
 
-public class dataBaseOperation {
+public class dataBaseMathod {
 
 
     private Context mContex;
 
-    public dataBaseOperation(Context context) {
+    public dataBaseMathod(Context context) {
         mContex = context;
     }
 

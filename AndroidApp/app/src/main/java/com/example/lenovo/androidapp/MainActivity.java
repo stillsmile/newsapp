@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.bt_database:
-                intent.setClass(this,newsActivity.class);
+                intent.setClass(this,databaseOperation.class);
                 startActivity(intent);
                 break;
 
