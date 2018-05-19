@@ -16,6 +16,7 @@
                 android:id="@+id/cb_id"
                 android:tag="xxx"
                 android:focusable="false"
+                android:clickable="false"
                 android:layout_weight="0.5" />
 
             <EditText
@@ -24,6 +25,7 @@
                 android:inputType="textPersonName"
                 android:text="Name"
                 android:ems="10"
+                android:focusable="false"
                 android:id="@+id/et_name"
                 android:layout_weight="1" />
 
@@ -33,6 +35,7 @@
                 android:inputType="textPersonName"
                 android:text="sex"
                 android:ems="10"
+                android:focusable="false"
                 android:id="@+id/et_sex"
                 android:layout_weight="1" />
 
@@ -42,6 +45,7 @@
                 android:inputType="textPersonName"
                 android:text="age"
                 android:ems="10"
+                android:focusable="false"
                 android:id="@+id/et_age"
                 android:layout_weight="1" />
 
@@ -51,6 +55,7 @@
                 android:inputType="textPersonName"
                 android:text="phone"
                 android:ems="10"
+                android:focusable="false"
                 android:id="@+id/et_phone"
                 android:layout_weight="1" />
 
@@ -60,6 +65,7 @@
                 android:inputType="textPersonName"
                 android:text="salary"
                 android:ems="10"
+                android:focusable="false"
                 android:id="@+id/et_salary"
                 android:layout_weight="1" />
 

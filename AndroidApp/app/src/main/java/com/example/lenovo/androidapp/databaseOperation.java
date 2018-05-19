@@ -16,18 +16,21 @@ import Adapter.dataAdapter;
 import bean.DataTestBean;
 import utils.LogUtils;
 
-public class databaseOperation extends AppCompatActivity implements AdapterView.OnItemClickListener ,View.OnClickListener{
+import static com.example.lenovo.androidapp.R.id.cb_id;
+
+public class databaseOperation extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private Context mContext;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database_operation);
         mContext = this;
-        ListView listView = (ListView) findViewById(R.id.lv_dataInfo);
+        listView = (ListView) findViewById(R.id.lv_dataInfo);
         ArrayList<DataTestBean> list = new ArrayList<DataTestBean>();
-        for(int i=0;i < 20 ; i ++){
+        for (int i = 0; i < 20; i++) {
             DataTestBean testBean = new DataTestBean();
             testBean.id = i;
             testBean.name = "asd  " + i;
@@ -41,7 +44,7 @@ public class databaseOperation extends AppCompatActivity implements AdapterView.
 
 
         if (list != null && list.size() > 0) {
-            LogUtils.w("sss","mContext " + mContext);
+            LogUtils.w("sss", "mContext " + mContext);
             dataAdapter adapter = new dataAdapter(mContext, list);
             listView.setAdapter(adapter);
         }
@@ -57,24 +60,24 @@ public class databaseOperation extends AppCompatActivity implements AdapterView.
         //需要获取条目上bean对象中url做跳转
 //        NewsBean bean = (NewsBean) parent.getItemAtPosition(position);
         DataTestBean dataTestBean = (DataTestBean) parent.getItemAtPosition(position);
-        String dataTestBeanId =  String.valueOf(dataTestBean.id);
-        String dataTestBeanName =  String.valueOf(dataTestBean.name);
-        String dataTestBeanSex =  String.valueOf(dataTestBean.sex);
-        CheckBox checkBox = (CheckBox) findViewById(R.id.cb_id);
+        String dataTestBeanId = String.valueOf(dataTestBean.id);
+        String dataTestBeanName = String.valueOf(dataTestBean.name);
+        String dataTestBeanSex = String.valueOf(dataTestBean.sex);
+        CheckBox checkBox = (CheckBox) findViewById(cb_id);
         String tag = (String) checkBox.getTag();
         String tag_test = (String) checkBox.getTag(R.id.tag_test);
-        String cb_id = (String) checkBox.getTag(R.id.cb_id);
+        Object cb_id = checkBox.getTag(R.id.cb_id);
 //        String layoutTag = String.valueOf();
 
-        TextView tv_dataInfo = (TextView) view.findViewById(R.id.tv_dataInfo);
-        tv_dataInfo.setText("dataTestBeanId:" + dataTestBeanId + "/n" +
-                "dataTestBeanName:" + dataTestBeanName + "/n" +
-                "dataTestBeanSex:" + dataTestBeanSex + "/n" +
-                "tag:" + tag + "/n" +
-                "tag_test:" + tag_test + "/n" +
+        TextView tv_dataInfo = (TextView) databaseOperation.this.findViewById(R.id.tv_dataInfo);
+        tv_dataInfo.setText("dataTestBeanId:" + dataTestBeanId + "\n" +
+                "dataTestBeanName:" + dataTestBeanName + "\n" +
+                "dataTestBeanSex:" + dataTestBeanSex + "\n" +
+                "tag:" + tag + "\n" +
+                "tag_test:" + tag_test + "\n" +
                 "cb_id:" + cb_id);
 
-        Toast.makeText(mContext,"xxxxxxx"+tag ,Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "xxxxxxx" + tag, Toast.LENGTH_SHORT).show();
 
 
 //        //跳转浏览器
