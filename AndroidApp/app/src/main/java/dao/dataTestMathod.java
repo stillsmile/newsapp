@@ -13,21 +13,21 @@ import bean.NewsBean;
  * Created by user on 2018/5/18.
  */
 
-public class dataBaseMathod {
+public class dataTestMathod {
 
 
     private Context mContex;
 
-    public dataBaseMathod(Context context) {
+    public dataTestMathod(Context context) {
         mContex = context;
     }
 
     public int delete() {
 
         //创建一个帮助类对象
-        databaseOpenHelper databaseOpenHelper = new databaseOpenHelper(mContex);
+        dataTestOpenHelper dataTestOpenHelper = new dataTestOpenHelper(mContex);
         //调用getReadableDatabase方法，来初始化数据库的创建
-        SQLiteDatabase database = databaseOpenHelper.getReadableDatabase();
+        SQLiteDatabase database = dataTestOpenHelper.getReadableDatabase();
         String sql = "delete from testDataBase where id = 'xx'  ";
 //        database.delete(String table, String whereClause, String[] whereArgs);
         //table 表名 whereClause 删除条件 whereArgs 条件的占位符的参数，  返回值 成功删除的多少行
@@ -38,8 +38,8 @@ public class dataBaseMathod {
     }
 
     public boolean insert() {
-        databaseOpenHelper databaseOpenHelper = new databaseOpenHelper(mContex);
-        SQLiteDatabase database = databaseOpenHelper.getReadableDatabase();
+        dataTestOpenHelper dataTestOpenHelper = new dataTestOpenHelper(mContex);
+        SQLiteDatabase database = dataTestOpenHelper.getReadableDatabase();
         String sql = "insert into testDataBase(_id,name) values('1','name1')";
         ContentValues values = new ContentValues();
         values.put("name", "zs");
@@ -56,8 +56,8 @@ public class dataBaseMathod {
     }
 
     public boolean update() {
-        databaseOpenHelper databaseOpenHelper = new databaseOpenHelper(mContex);
-        SQLiteDatabase database = databaseOpenHelper.getReadableDatabase();
+        dataTestOpenHelper dataTestOpenHelper = new dataTestOpenHelper(mContex);
+        SQLiteDatabase database = dataTestOpenHelper.getReadableDatabase();
         String sql = "update testDataBase set naem='dd' where id ='1'";
         ContentValues values = new ContentValues();
         values.put("name", "zs");
@@ -73,8 +73,8 @@ public class dataBaseMathod {
     }
 
     public ArrayList<NewsBean> query() {
-        databaseOpenHelper databaseOpenHelper = new databaseOpenHelper(mContex);
-        SQLiteDatabase database = databaseOpenHelper.getReadableDatabase();
+        dataTestOpenHelper dataTestOpenHelper = new dataTestOpenHelper(mContex);
+        SQLiteDatabase database = dataTestOpenHelper.getReadableDatabase();
         String sql = "select * from testDataBase where id = '1'";
 
         //(String table  表名, String[] columns  查询的列名（如何null则查询所有列）, String selection 查询条件,

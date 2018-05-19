@@ -11,11 +11,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import Adapter.dataAdapter;
 import bean.DataTestBean;
+import dao.TodayDataBase;
 import utils.LogUtils;
 
 public class databaseOperation extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
@@ -23,6 +25,8 @@ public class databaseOperation extends AppCompatActivity implements AdapterView.
     private Context mContext;
     private ListView listView;
     private dataAdapter adapter;
+    private ArrayList<DataTestBean> list;
+    private ArrayList<DataTestBean> isSelectNum = new ArrayList<DataTestBean>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class databaseOperation extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.activity_database_operation);
         mContext = this;
         listView = (ListView) findViewById(R.id.lv_dataInfo);
-        ArrayList<DataTestBean> list = new ArrayList<DataTestBean>();
+        list = new ArrayList<DataTestBean>();
         for (int i = 0; i < 20; i++) {
             DataTestBean testBean = new DataTestBean();
             testBean.id = i;
@@ -39,8 +43,17 @@ public class databaseOperation extends AppCompatActivity implements AdapterView.
             testBean.sex = "asd";
             testBean.phone = "asd";
             testBean.salary = 26318;
-            list.add(testBean);
+//            list.add(testBean);
         }
+        DataTestBean testBean = new DataTestBean();
+        testBean.id = 1;
+        testBean.name = "asd " + 1;
+        testBean.age = 23;
+        testBean.sex = "asd";
+        testBean.phone = "asd";
+        testBean.salary = 26318;
+//        list.add(testBean);
+        list = new TodayDataBase(mContext).query();
         if (list != null && list.size() > 0) {
             LogUtils.w("sss", "mContext " + mContext);
             adapter = new dataAdapter(mContext, list);
@@ -48,6 +61,14 @@ public class databaseOperation extends AppCompatActivity implements AdapterView.
         }
         //设置onclick事件
         listView.setOnItemClickListener(this);
+
+        Button bt_add = (Button) findViewById(R.id.bt_add);
+        Button bt_delete = (Button) findViewById(R.id.bt_delete);
+        Button bt_update = (Button) findViewById(R.id.bt_update);
+        Button bt_query = (Button) findViewById(R.id.bt_query);
+        bt_add.setOnClickListener(this);
+        bt_update.setOnClickListener(this);
+        bt_delete.setOnClickListener(this);
 
     }
 
@@ -58,10 +79,15 @@ public class databaseOperation extends AppCompatActivity implements AdapterView.
 //        NewsBean bean = (NewsBean) parent.getItemAtPosition(position);
         final DataTestBean dataTestBean = (DataTestBean) parent.getItemAtPosition(position);
         final CheckBox cb_id = (CheckBox) view.findViewById(R.id.cb_id);
+//        isSelectNum = new ArrayList<DataTestBean>();
         if (cb_id.isChecked()){
             cb_id.setChecked(false);
+            LogUtils.w("sss","移除的id : " + dataTestBean.getId());
+            isSelectNum.remove(dataTestBean);
         }else {
             cb_id.setChecked(true);
+            LogUtils.w("sss","添加的id : " + dataTestBean.getId());
+            isSelectNum.add(dataTestBean);
         }
         String dataTestBeanId = String.valueOf(dataTestBean.id);
         String dataTestBeanName = String.valueOf(dataTestBean.name);
@@ -125,6 +151,11 @@ public class databaseOperation extends AppCompatActivity implements AdapterView.
                 dataTestBean.setSalary(Double.valueOf(String.valueOf(et_salary.getText())));
 //                listView.notifyDataSetChanged();
                 //刷新展示框中的值
+                ArrayList<DataTestBean> NowUpdate = new ArrayList<DataTestBean>();
+                NowUpdate.add(dataTestBean);
+                int updateNum = new TodayDataBase(mContext).update(NowUpdate);
+                LogUtils.w("sss","更新了" + updateNum + "条！");
+                Toast.makeText(mContext,"更新了" + updateNum + "条！",Toast.LENGTH_LONG).show();
                 adapter.notifyDataSetChanged();
 
                 //关闭自定义框
@@ -154,6 +185,26 @@ public class databaseOperation extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.bt_add :
+               long insertresult =  new TodayDataBase(mContext).insert(list);
+                adapter.notifyDataSetChanged();
+                LogUtils.w("sss","更新了" + insertresult + "条！");
+                Toast.makeText(mContext,"添加了" + insertresult + "条！",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bt_update :
+                int updateresult =  new TodayDataBase(mContext).update(list);
+                adapter.notifyDataSetChanged();
+                LogUtils.w("sss","更新了" + updateresult + "条！");
+                Toast.makeText(mContext,"更新了" + updateresult + "条！",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bt_delete :
+                int deleteresult =  new TodayDataBase(mContext).delete(isSelectNum);
+                adapter.notifyDataSetChanged();
+                LogUtils.w("sss","删除了" + deleteresult + "条！");
+                Toast.makeText(mContext,"删除了" + deleteresult + "条！",Toast.LENGTH_SHORT).show();
+                break;
+        }
 
     }
 }

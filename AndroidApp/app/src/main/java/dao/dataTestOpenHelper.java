@@ -4,19 +4,16 @@ package dao;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.Settings;
 
 /**
  * Created by user on 2018/5/18.
  */
 
-public class databaseOpenHelper extends SQLiteOpenHelper {
-    public databaseOpenHelper(Context context) {
+public class dataTestOpenHelper extends SQLiteOpenHelper {
+    public dataTestOpenHelper(Context context) {
         //context :上下文 name：数据库文件的名称  factory 用来创建cursor对象(结果集)，默认为null  version ：版本
         super(context, "testDataBase.db", null, 1);
         //此处操作执行，创建了数据库，为接下来的表的创建提供方便
-
-
     }
 
     @Override
