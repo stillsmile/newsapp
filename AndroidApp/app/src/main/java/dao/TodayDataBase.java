@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 
 import bean.DataTestBean;
+import utils.LogUtils;
 
 /**
  * Created by lenovo on 2018/5/19.
@@ -30,6 +31,9 @@ public class TodayDataBase {
             db = todayDataBaseOperHelper.getReadableDatabase();
             for (DataTestBean dataTestBean : list){
                 result += db.delete("testDataBase","_id=?",new String[]{String.valueOf(dataTestBean.id)});
+                LogUtils.w("sss","result" + String.valueOf(result));
+                LogUtils.w("sss","id" + String.valueOf(dataTestBean.id));
+                LogUtils.w("sss","list.size" + String.valueOf(list.size()));
             }
         }
         db.close();
@@ -65,6 +69,7 @@ public class TodayDataBase {
         //通过帮助类对象获得一个数据库操作对象
         SQLiteDatabase db = todayDataBaseOperHelper.getReadableDatabase();
         long result = 0;
+        long RowID = 0;
         //通过数据库操作对象执行sql操作
         if(list.size() <= 0){
             return result;
@@ -79,11 +84,16 @@ public class TodayDataBase {
             values.put("age", dataTestBean.age);
             values.put("phone", dataTestBean.phone);
             values.put("salary", dataTestBean.salary);
-            result =  db.insert("testDataBase", null, values);
+            //返回新添记录的行号，与主键id无关
+            result += i;
+            RowID =  db.insert("testDataBase", null, values);
+            LogUtils.w("sss","result" + String.valueOf(result));
+            LogUtils.w("sss","id" + String.valueOf(dataTestBean.id));
+            LogUtils.w("sss","list.size" + String.valueOf(list.size()));
         }
         db.close();
 
-        return result;
+        return result+1;
 
     }
     public ArrayList<DataTestBean> query(){

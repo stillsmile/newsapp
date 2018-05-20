@@ -45,6 +45,7 @@ public class NewsDaoUtils {
             values.put("type", newsBean.type);
             values.put("time", newsBean.time);
             values.put("comment", newsBean.comment);
+            //返回新添记录的行号，与主键id无关
             db.insert("news", null, values);
 
         }
