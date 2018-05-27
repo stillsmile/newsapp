@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".newsActivity" />
-        <activity android:name=".databaseOperation"></activity>
+        <activity android:name=".databaseOperation" />
+        <activity android:name=".busqueryInfo"></activity>
     </application>
 
 </manifest>

@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button.setOnClickListener(this);
         Button bt_database = (Button) findViewById(R.id.bt_database);
         bt_database.setOnClickListener(this);
-
+        Button bt_busHelper = (Button) findViewById(R.id.bt_busHelper);
+        bt_busHelper.setOnClickListener(this);
 
     }
 
@@ -36,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_database:
                 intent.setClass(this,databaseOperation.class);
+                startActivity(intent);
+                break;
+            case R.id.bt_busHelper:
+                intent.setClass(this,busqueryInfo.class);
                 startActivity(intent);
                 break;
 

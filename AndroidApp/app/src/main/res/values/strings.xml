@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AndroidApp</string>
-    <item type="id" name="cb_id"></item>
-    <item type="id" name="tag_test"></item>
+    <item name="cb_id" type="id"></item>
+    <item name="tag_test" type="id"></item>
 
 
 </resources>

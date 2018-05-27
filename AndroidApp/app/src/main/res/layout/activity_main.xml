@@ -29,10 +29,10 @@
             android:layout_weight="1" />
 
         <Button
-            android:text="操作网络请求"
+            android:text="实时公交查询"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button"
+            android:id="@+id/bt_busHelper"
             android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>
