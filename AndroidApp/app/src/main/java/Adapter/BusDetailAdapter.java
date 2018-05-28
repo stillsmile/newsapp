@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,6 +12,7 @@ import com.example.lenovo.androidapp.R;
 import java.util.ArrayList;
 
 import bean.BusDetailInfoBean;
+import utils.LogUtils;
 
 import static android.view.View.inflate;
 
@@ -56,10 +58,11 @@ public class BusDetailAdapter extends BaseAdapter {
         busName.setText(busDetailData.StationCName);
         TextView busDirector = (TextView) view.findViewById(R.id.item_tv_des);
         busDirector.setText(busDetailData.InTime);
-        if(busDetailData.InTime =="" || busDetailData.InTime == null){
-        }else{
-//            view.setBackground(android.R.color.darker_gray);
-        }
+//        if((busDetailData.InTime+"").length()>7){
+            busDirector.setTextColor(Color.RED);
+//            view.setBackgroundColor(Color.GRAY);
+//        }
+        LogUtils.w("sss","busDetailData.InTime=" +busDetailData.InTime +"==");
 
 
         return view;
