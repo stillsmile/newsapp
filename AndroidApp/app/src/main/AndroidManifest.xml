@@ -20,7 +20,9 @@
         </activity>
         <activity android:name=".newsActivity" />
         <activity android:name=".databaseOperation" />
-        <activity android:name=".busqueryInfo"></activity>
+        <activity android:name=".busqueryInfo" />
+        <activity android:name=".busrountingshow" />
+        <activity android:name=".busdetailinfo"></activity>
     </application>
 
 </manifest>
