@@ -2,17 +2,14 @@ package com.example.lenovo.androidapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -50,15 +47,15 @@ public class busrountingshow extends AppCompatActivity {
             String linename = list[1];
             String lineroute = list[2];
             if (which == 1){
-                TextView tv_busDirectionOppsite = (TextView) findViewById(R.id.tv_busDirectionOppsite);
-                tv_busDirectionOppsite.setText(linename);
-                TextView tv_direction = (TextView) findViewById(R.id.tv_direction);
-                tv_direction.setText(lineroute);
+//                TextView tv_busDirectionOppsite = (TextView) findViewById(R.id.tv_busDirectionOppsite);
+//                tv_busDirectionOppsite.setText(linename);
+//                TextView tv_direction = (TextView) findViewById(R.id.tv_direction);
+//                tv_direction.setText(lineroute);
             } else {
-                TextView tv_busNameOppsite = (TextView) findViewById(R.id.tv_busNameOppsite);
-                tv_busNameOppsite.setText(linename);
-                TextView tv_directionOppsite = (TextView) findViewById(R.id.tv_directionOppsite);
-                tv_directionOppsite.setText(lineroute);
+//                TextView tv_busNameOppsite = (TextView) findViewById(R.id.tv_busNameOppsite);
+//                tv_busNameOppsite.setText(linename);
+//                TextView tv_directionOppsite = (TextView) findViewById(R.id.tv_directionOppsite);
+//                tv_directionOppsite.setText(lineroute);
                 whichShow = 0;
             }
 
@@ -84,7 +81,12 @@ public class busrountingshow extends AppCompatActivity {
             }
         }).start();
 
-       ListView busListView = (ListView) findViewById(R.id.lv_busWhichChoose);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ListView busListView = (ListView) findViewById(R.id.lv_busWhichChoose);
 
         BusAdapter busAdapter = new BusAdapter(mContext, busData);
 //        busAdapter.set
@@ -194,7 +196,9 @@ public class busrountingshow extends AppCompatActivity {
             busName.setText(busRounteInfo.busName);
             busName.setTag(busRounteInfo.lineID);
            TextView busDirector = (TextView) view.findViewById(R.id.item_tv_des);
-            busDirector.setText(busRounteInfo.busDirector);
+//           TextView busDirector = (TextView) view.findViewById(R.id.item_tv_des);
+//           busDirector.setText(busRounteInfo.busDirector);
+           busDirector.setText((busRounteInfo.busDirector).replace("\r\n", "").trim());
 
             return view;
         }
