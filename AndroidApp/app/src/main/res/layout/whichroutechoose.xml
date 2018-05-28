@@ -8,7 +8,7 @@
 
     <view.MyImageView
         android:scaleType="fitXY"
-        android:background="#ff0000"
+        android:background="#ddd7d7"
         android:id="@+id/item_img_icon"
         android:layout_width="68dp"
         android:layout_height="68dp"
