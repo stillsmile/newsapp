@@ -49,11 +49,11 @@ public class busdetailinfo extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ListView listView = (ListView) findViewById(R.id.lv_busDataInfo);
-        BusDetailAdapter busDetailData = new BusDetailAdapter(mContext,busDetailInfos);
-
-        listView.setAdapter(busDetailData);
-
+        if(busDetailInfos.size() >0){
+            ListView listView = (ListView) findViewById(R.id.lv_busDataInfo);
+            BusDetailAdapter busDetailData = new BusDetailAdapter(mContext,busDetailInfos);
+            listView.setAdapter(busDetailData);
+        }
 
     }
 

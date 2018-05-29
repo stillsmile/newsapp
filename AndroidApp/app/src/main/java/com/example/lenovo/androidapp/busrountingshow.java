@@ -185,7 +185,7 @@ public class busrountingshow extends AppCompatActivity {
             if (convertView != null) {
                 view = convertView;
             } else {
-                view = inflate(context, R.layout.whichroutechoose, null);
+                view = inflate(context, R.layout.activity_whichroutechoose, null);
             }
 //            CheckBox cb_id = (CheckBox) view.findViewById(R.id.cb_id);
 //            busRounte.busName = busName;

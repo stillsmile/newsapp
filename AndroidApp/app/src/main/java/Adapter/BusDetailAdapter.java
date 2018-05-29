@@ -51,17 +51,28 @@ public class BusDetailAdapter extends BaseAdapter {
         if (convertView != null) {
             view = convertView;
         } else {
-            view = inflate(context, R.layout.whichroutechoose, null);
+            view = inflate(context, R.layout.activity_busrountedata, null);
         }
         BusDetailInfoBean busDetailData = list.get(position);
         TextView busName = (TextView) view.findViewById(R.id.item_tv_title);
         busName.setText(busDetailData.StationCName);
         TextView busDirector = (TextView) view.findViewById(R.id.item_tv_des);
+        TextView StationCNameNum = (TextView) view.findViewById(R.id.item_img_icon);
+        StationCNameNum.setText(position +1 + "");
         busDirector.setText(busDetailData.InTime);
-//        if((busDetailData.InTime+"").length()>7){
+
+
+        String BusInfo = busDetailData.BusInfo;
+        String busInTime = busDetailData.InTime;
+        String StationCName = busDetailData.StationCName;
+        String Code = busDetailData.Code;
+        String ID = busDetailData.ID;
+        view.setBackgroundColor(Color.WHITE);
+        if(busInTime.equals("") || busInTime.length() == 0){
+        } else{
             busDirector.setTextColor(Color.RED);
-//            view.setBackgroundColor(Color.GRAY);
-//        }
+            view.setBackgroundColor(Color.GRAY);
+        }
         LogUtils.w("sss","busDetailData.InTime=" +busDetailData.InTime +"==");
 
 
