@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="118"
+        android:text="228"
         android:hint="请输入公交车号"
         android:ems="10"
         android:id="@+id/et_busNum"

@@ -71,11 +71,12 @@ public class BusDetailAdapter extends BaseAdapter {
         view.setBackgroundColor(Color.WHITE);
         if(busInTime.equals("") || busInTime.length() == 0){
         } else{
-            busDirector.setText(busDetailData.InTime + "   车牌:" + BusInfo);
+            busDirector.setText(BusInfo + "             "+busDetailData.InTime );
             busDirector.setTextColor(Color.RED);
             view.setBackgroundColor(Color.GRAY);
         }
         LogUtils.w("sss","busDetailData.InTime=" +busDetailData.InTime +"==");
+        LogUtils.w("aa","测试数据的更新" + position);
 
 
         return view;

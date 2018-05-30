@@ -74,7 +74,7 @@ public class busrountingshow extends AppCompatActivity {
         supportActionBar.setIcon(R.drawable.bus);//设置ActionBar的icon图标
         supportActionBar.setTitle("当前行驶的路线是 :" + busNum);//设置ActionBar的标题
         supportActionBar.setHomeButtonEnabled(true);//主键按钮能否可点击
-        supportActionBar.setDisplayHomeAsUpEnabled(false);//显示返回图标
+        supportActionBar.setDisplayHomeAsUpEnabled(true);//显示返回图标
 
 
         new Thread(new Runnable() {

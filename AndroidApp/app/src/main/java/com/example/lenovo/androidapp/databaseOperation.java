@@ -44,7 +44,7 @@ public class databaseOperation extends AppCompatActivity implements AdapterView.
             testBean.sex = "asd";
             testBean.phone = "asd";
             testBean.salary = 26318;
-//            list.add(testBean);
+            list.add(testBean);
         }
         DataTestBean testBean = new DataTestBean();
         testBean.id = 1;
@@ -53,8 +53,8 @@ public class databaseOperation extends AppCompatActivity implements AdapterView.
         testBean.sex = "asd";
         testBean.phone = "asd";
         testBean.salary = 26318;
-//        list.add(testBean);
-        list = new TodayDataBase(mContext).query();
+        list.add(testBean);
+//        list = new TodayDataBase(mContext).query();
         if (list != null && list.size() > 0) {
             LogUtils.w("sss", "mContext " + mContext);
             adapter = new dataAdapter(mContext, list);
