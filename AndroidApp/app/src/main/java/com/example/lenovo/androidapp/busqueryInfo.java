@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +43,15 @@ public class busqueryInfo extends AppCompatActivity{
 //        intent = new Intent();
 //        intent.setClass(this,busrountingshow.class);
 //        startActivity(intent);
+
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.setIcon(R.drawable.bus);//设置ActionBar的icon图标
+        supportActionBar.setTitle("线路查询");//设置ActionBar的标题
+        supportActionBar.setHomeButtonEnabled(false);//主键按钮能否可点击
+        supportActionBar.setDisplayHomeAsUpEnabled(true);//显示返回图标
+
+
+
         Button bt_search = (Button) findViewById(R.id.bt_search);
 
         bt_search.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +68,22 @@ public class busqueryInfo extends AppCompatActivity{
         });
 
 
+
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:////主键id 必须这样写
+                onBackPressed();//按返回图标直接回退上个界面
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

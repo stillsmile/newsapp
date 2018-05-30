@@ -3,8 +3,13 @@ package com.example.lenovo.androidapp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -28,7 +33,39 @@ public class busdetailinfo extends AppCompatActivity {
     private Context mContext;
     private Intent intent;
     private String buslineID;
+    private String busNum;
+    private ActionBar supportActionBar;
+    private BusDetailAdapter busDetailData;
     private ArrayList<BusDetailInfoBean> busDetailInfos;
+    private int count = 0;
+
+    private Handler handler = new Handler();
+
+    private Runnable runnable = new Runnable() {
+        public void run () {
+
+            getbusData(buslineID);
+            busDetailData.notifyDataSetChanged();
+
+            handler.postDelayed(this,1000);
+            supportActionBar.setTitle(busNum + "路公交正在行驶中---" + count);//设置ActionBar的标题
+//            Toast.makeText(mContext,count+"",Toast.LENGTH_SHORT).show();
+
+            count++;
+            if(count == 10){
+//                handler.removeCallbacks(runnable);
+            }
+        }
+    };
+
+//    Handler handler = new Handler(){
+//        public void handleMessage(Message msg) {
+//            String list[] = (String[]) msg.obj;
+//            int which = msg.what;
+//
+//        };
+//    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +73,22 @@ public class busdetailinfo extends AppCompatActivity {
         mContext =this;
         intent = getIntent();
         buslineID = intent.getStringExtra("buslineID");
+        busNum = intent.getStringExtra("busNum");
+
+        supportActionBar = getSupportActionBar();
+        supportActionBar.setIcon(R.drawable.bus);//设置ActionBar的icon图标
+        supportActionBar.setTitle(busNum + "路公交正在行驶中");//设置ActionBar的标题
+        supportActionBar.setHomeButtonEnabled(true);//主键按钮能否可点击
+        supportActionBar.setDisplayHomeAsUpEnabled(true);//显示返回图标
+
+//        开始计时
+//        handler.removeCallbacks(runnable);
+//        handler.postDelayed(runnable,1000);
+            handler.post(runnable);
+//        停止计时
+//        handler.removeCallbacks(runnable);
+//        第三种代码看起来也非常的简洁，推荐使用。
+
 
         new Thread(new Runnable() {
             @Override
@@ -51,7 +104,7 @@ public class busdetailinfo extends AppCompatActivity {
 
         if(busDetailInfos.size() >0){
             ListView listView = (ListView) findViewById(R.id.lv_busDataInfo);
-            BusDetailAdapter busDetailData = new BusDetailAdapter(mContext,busDetailInfos);
+            busDetailData = new BusDetailAdapter(mContext,busDetailInfos);
             listView.setAdapter(busDetailData);
         }
 
@@ -111,7 +164,19 @@ public class busdetailinfo extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
 
+
+    //添加返回的事件  同下一个activity的返回方法
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:////主键id 必须这样写
+                onBackPressed();//按返回图标直接回退上个界面
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

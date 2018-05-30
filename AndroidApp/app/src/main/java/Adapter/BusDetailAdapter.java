@@ -59,8 +59,9 @@ public class BusDetailAdapter extends BaseAdapter {
         TextView busDirector = (TextView) view.findViewById(R.id.item_tv_des);
         TextView StationCNameNum = (TextView) view.findViewById(R.id.item_img_icon);
         StationCNameNum.setText(position +1 + "");
-        busDirector.setText(busDetailData.InTime);
+        busDirector.setText("");
 
+//        BusInfo
 
         String BusInfo = busDetailData.BusInfo;
         String busInTime = busDetailData.InTime;
@@ -70,6 +71,7 @@ public class BusDetailAdapter extends BaseAdapter {
         view.setBackgroundColor(Color.WHITE);
         if(busInTime.equals("") || busInTime.length() == 0){
         } else{
+            busDirector.setText(busDetailData.InTime + "   车牌:" + BusInfo);
             busDirector.setTextColor(Color.RED);
             view.setBackgroundColor(Color.GRAY);
         }

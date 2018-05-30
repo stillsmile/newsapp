@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,14 @@ public class busrountingshow extends AppCompatActivity {
         mContext =this;
         intent = getIntent();
         busNum = intent.getStringExtra("busNum");
+
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.setIcon(R.drawable.bus);//设置ActionBar的icon图标
+        supportActionBar.setTitle("当前行驶的路线是 :" + busNum);//设置ActionBar的标题
+        supportActionBar.setHomeButtonEnabled(true);//主键按钮能否可点击
+        supportActionBar.setDisplayHomeAsUpEnabled(false);//显示返回图标
+
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -98,9 +107,9 @@ public class busrountingshow extends AppCompatActivity {
 
                 BusRounte busRounte = (BusRounte) parent.getItemAtPosition(position);
                 String buslineID = busRounte.lineID;
-
                 intent=new Intent(mContext,busdetailinfo.class);
                 intent.putExtra("buslineID",buslineID);
+                intent.putExtra("busNum",busNum);
                 startActivity(intent);
             }
         });
@@ -202,6 +211,13 @@ public class busrountingshow extends AppCompatActivity {
 
             return view;
         }
+    }
+
+    //添加返回的事件  同上一个activity的返回方法
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 
 
