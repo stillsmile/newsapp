@@ -25,6 +25,7 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
     private int count = 0;
     private ArrayList<NewsBean> allNews;
     private NewsAdapter newsAdapter;
+    private ArrayList<NewsBean> allNewsTest;
     private Handler handler = new Handler(){
         public void handleMessage(android.os.Message msg) {
 
@@ -41,15 +42,17 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
     };
     private Runnable runnable = new Runnable() {
         public void run () {
-            handler.postDelayed(this,5000);
+            handler.postDelayed(this,10000);
             count++;
 //            allNews.clear();
             if(count % 2 == 1){
+                getAllCities();
 //                allNews.addAll(NewsUtils.getAllNewsForNetWork(mContext));
                 Toast.makeText(mContext,count +"",Toast.LENGTH_SHORT).show();
 //                ArrayList<NewsBean> allNews = NewsUtils.getAllNewsForNetWorkTest(mContext);
 //                handler.removeCallbacks(runnable);
             } else {
+                getAllCities();
 //                allNews = NewsUtils.getAllNewsForNetWorkTest(mContext);
                 Toast.makeText(mContext,count +"",Toast.LENGTH_SHORT).show();
             }
@@ -78,11 +81,6 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
 
             @Override
             public void run() {
-//                try {
-//                    Thread.sleep(3000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
 
                 //请求网络数据
                 allNews = NewsUtils.getAllNewsForNetWork(mContext);
@@ -119,4 +117,36 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
         intent.setData(Uri.parse(url));
         startActivity(intent);
     }
+
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+//                    allNews.clear();
+                    allNews.addAll(allNewsTest);
+                    newsAdapter.notifyDataSetChanged();
+                    Toast.makeText(mContext,"allNewsTest  = " +allNewsTest.size() ,Toast.LENGTH_SHORT).show();
+                    break;
+
+            }
+        }
+    };
+    private void getAllCities() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(count%2==1){
+//                    allNews.addAll(NewsUtils.getAllNewsForNetWork(mContext));
+                    allNewsTest = NewsUtils.getAllNewsForNetWork(mContext);
+                }else{
+                    allNewsTest = NewsUtils.getAllNewsForNetWorkTest(mContext);
+                }
+                mHandler.sendEmptyMessage(1);
+            }
+        }).start();
+    }
+
 }
