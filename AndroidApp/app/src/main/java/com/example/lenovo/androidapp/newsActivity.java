@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,9 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private Context mContext;
     private ListView lv_news;
+    private int count = 0;
+    private ArrayList<NewsBean> allNews;
+    private NewsAdapter newsAdapter;
     private Handler handler = new Handler(){
         public void handleMessage(android.os.Message msg) {
 
@@ -35,6 +39,23 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
 
         };
     };
+    private Runnable runnable = new Runnable() {
+        public void run () {
+            handler.postDelayed(this,5000);
+            count++;
+//            allNews.clear();
+            if(count % 2 == 1){
+//                allNews.addAll(NewsUtils.getAllNewsForNetWork(mContext));
+                Toast.makeText(mContext,count +"",Toast.LENGTH_SHORT).show();
+//                ArrayList<NewsBean> allNews = NewsUtils.getAllNewsForNetWorkTest(mContext);
+//                handler.removeCallbacks(runnable);
+            } else {
+//                allNews = NewsUtils.getAllNewsForNetWorkTest(mContext);
+                Toast.makeText(mContext,count +"",Toast.LENGTH_SHORT).show();
+            }
+//            newsAdapter.notifyDataSetChanged();
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +69,7 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
 
         if(allnews_database !=null && allnews_database.size()>0){
             //创建一个adapter设置给listview
-            NewsAdapter newsAdapter = new NewsAdapter(mContext, allnews_database);
+            newsAdapter = new NewsAdapter(mContext, allnews_database);
             lv_news.setAdapter(newsAdapter);
         }
 
@@ -64,12 +85,12 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
 //                }
 
                 //请求网络数据
-                ArrayList<NewsBean> allNews = NewsUtils.getAllNewsForNetWork(mContext);
+                allNews = NewsUtils.getAllNewsForNetWork(mContext);
+//                ArrayList<NewsBean> allNews = NewsUtils.getAllNewsForNetWorkTest(mContext);
                 //通过handler将msg发送到主线程去更新Ui
                 Message msg = Message.obtain();
                 msg.obj = allNews;
                 handler.sendMessage(msg);
-
 
             }
         }).start();
@@ -78,9 +99,8 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
         //3.设置listview条目的点击事件
         lv_news.setOnItemClickListener(this);
 
-
-
 //        list.setAdapter(allNews);
+        handler.post(runnable);
     }
 
     //listview的条目点击时会调用该方法 parent:代表listviw  view:点击的条目上的那个view对象   position:条目的位置  id： 条目的id
