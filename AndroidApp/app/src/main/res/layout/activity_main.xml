@@ -49,10 +49,10 @@
             android:layout_weight="1" />
 
         <Button
-            android:text=""
+            android:text="listview刷新"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/newtest1"
+            android:id="@+id/bt_listviewshuxin"
             android:layout_weight="1" />
 
         <Button

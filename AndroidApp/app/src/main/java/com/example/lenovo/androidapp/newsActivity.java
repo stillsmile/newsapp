@@ -25,11 +25,12 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
     private int count = 0;
     private ArrayList<NewsBean> allNews;
     private NewsAdapter newsAdapter;
+//    private ArrayList<NewsBean> allnews_database;
     private ArrayList<NewsBean> allNewsTest;
     private Handler handler = new Handler(){
         public void handleMessage(android.os.Message msg) {
 
-            ArrayList<NewsBean> allNews = (ArrayList<NewsBean>) msg.obj;
+            allNews = (ArrayList<NewsBean>) msg.obj;
 
             if(allNews != null && allNews .size()>0)
             {
@@ -44,19 +45,12 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
         public void run () {
             handler.postDelayed(this,10000);
             count++;
-//            allNews.clear();
             if(count % 2 == 1){
                 getAllCities();
-//                allNews.addAll(NewsUtils.getAllNewsForNetWork(mContext));
                 Toast.makeText(mContext,count +"",Toast.LENGTH_SHORT).show();
-//                ArrayList<NewsBean> allNews = NewsUtils.getAllNewsForNetWorkTest(mContext);
-//                handler.removeCallbacks(runnable);
             } else {
                 getAllCities();
-//                allNews = NewsUtils.getAllNewsForNetWorkTest(mContext);
-                Toast.makeText(mContext,count +"",Toast.LENGTH_SHORT).show();
             }
-//            newsAdapter.notifyDataSetChanged();
         }
     };
     @Override
@@ -68,30 +62,29 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
         lv_news = (ListView) findViewById(R.id.lv_news);
 
         //1.先去数据库中获取缓存的新闻数据展示到listview
-        ArrayList<NewsBean> allnews_database = NewsUtils.getAllNewsForDatabase(mContext);
+        allNews = NewsUtils.getAllNewsForDatabase(mContext);
 
-        if(allnews_database !=null && allnews_database.size()>0){
+        if(allNews !=null || allNews.size()>0){
             //创建一个adapter设置给listview
-            newsAdapter = new NewsAdapter(mContext, allnews_database);
+            newsAdapter = new NewsAdapter(mContext, allNews);
             lv_news.setAdapter(newsAdapter);
         }
 
         //2.通过网络获取服务器上的新闻数据用list封装 ,获取网络数据需要在子线程中做
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-
-                //请求网络数据
-                allNews = NewsUtils.getAllNewsForNetWork(mContext);
-//                ArrayList<NewsBean> allNews = NewsUtils.getAllNewsForNetWorkTest(mContext);
-                //通过handler将msg发送到主线程去更新Ui
-                Message msg = Message.obtain();
-                msg.obj = allNews;
-                handler.sendMessage(msg);
-
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//
+//                //请求网络数据
+//                allNews = NewsUtils.getAllNewsForNetWork(mContext);
+//                //通过handler将msg发送到主线程去更新Ui
+//                Message msg = Message.obtain();
+//                msg.obj = allNews;
+//                handler.sendMessage(msg);
+//
+//            }
+//        }).start();
 
 
         //3.设置listview条目的点击事件
@@ -126,11 +119,16 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
             switch (msg.what) {
                 case 1:
 //                    allNews.clear();
-                    allNews.addAll(allNewsTest);
-                    newsAdapter.notifyDataSetChanged();
-                    Toast.makeText(mContext,"allNewsTest  = " +allNewsTest.size() ,Toast.LENGTH_SHORT).show();
-                    break;
+//                    allNews.addAll(allNewsTest);
+                    if(allNewsTest != null){
 
+                        allNews.clear();
+                        allNews.addAll(allNewsTest);
+                        newsAdapter.list = allNews;
+                        newsAdapter.notifyDataSetChanged();
+                        Toast.makeText(mContext,"allNewsTest  = " +allNews.size() ,Toast.LENGTH_SHORT).show();
+                    }
+                    break;
             }
         }
     };

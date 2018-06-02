@@ -22,7 +22,9 @@
         <activity android:name=".databaseOperation" />
         <activity android:name=".busqueryInfo" />
         <activity android:name=".busrountingshow" />
-        <activity android:name=".busdetailinfo"></activity>
+        <activity android:name=".busdetailinfo" />
+        <activity android:name=".newsTestActivity" />
+        <activity android:name=".listViewShuaxin"></activity>
     </application>
 
 </manifest>

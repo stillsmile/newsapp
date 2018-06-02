@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt_busHelper.setOnClickListener(this);
         Button bt_newtestr = (Button) findViewById(R.id.bt_newtestr);
         bt_newtestr.setOnClickListener(this);
+        Button bt_listviewshuxin = (Button) findViewById(R.id.bt_listviewshuxin);
+        bt_listviewshuxin.setOnClickListener(this);
 
     }
 
@@ -44,6 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_busHelper:
                 intent.setClass(this,busqueryInfo.class);
                 startActivity(intent);
+                break;
+            case R.id.bt_listviewshuxin:
+                intent.setClass(this,listViewShuaxin.class);
+                startActivity(intent);
+                break;
             case R.id.bt_newtestr:
                 intent.setClass(this,newsTestActivity.class);
                 startActivity(intent);

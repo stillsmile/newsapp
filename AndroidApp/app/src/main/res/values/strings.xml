@@ -2,6 +2,7 @@
     <string name="app_name">AndroidApp</string>
     <item name="cb_id" type="id"></item>
     <item name="tag_test" type="id"></item>
+    <string name="action_settings">Settings</string>
 
 
 </resources>

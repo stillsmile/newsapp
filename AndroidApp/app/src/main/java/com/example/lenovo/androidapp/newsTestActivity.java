@@ -1,19 +1,18 @@
 package com.example.lenovo.androidapp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class newsTestActivity extends Activity {
 
@@ -34,7 +33,7 @@ public class newsTestActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_newtest);
 
 		lview = (ListView) findViewById(R.id.listView1);
 		data_list = new ArrayList<Map<String, Object>>();

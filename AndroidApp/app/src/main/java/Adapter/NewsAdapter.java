@@ -20,7 +20,7 @@ import view.MyImageView;
 public class NewsAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<NewsBean> list;
+    public ArrayList<NewsBean> list;
 
     public NewsAdapter(Context context, ArrayList<NewsBean> list) {
         this.context = context;

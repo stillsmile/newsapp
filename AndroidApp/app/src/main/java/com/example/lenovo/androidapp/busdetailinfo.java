@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -45,7 +43,7 @@ public class busdetailinfo extends AppCompatActivity {
         public void run () {
 
             getbusData(buslineID);
-            busDetailData.notifyDataSetChanged();
+//            busDetailData.notifyDataSetChanged();
 
             handler.postDelayed(this,1000);
             supportActionBar.setTitle(busNum + "路公交正在行驶中---" + count);//设置ActionBar的标题
@@ -145,8 +143,13 @@ public class busdetailinfo extends AppCompatActivity {
                 JSONArray jsonArray = root_json.getJSONArray("data");//获取root_json中的newss作为jsonArray对象
 
                 busDetailInfos = new ArrayList<BusDetailInfoBean>();
-                for (int i = 0 ;i < jsonArray.length();i++){//循环遍历jsonArray
-                    JSONObject bus_json = jsonArray.getJSONObject(i);//获取一条bus的json
+
+//                busDetailInfos.clear();
+                ArrayList<BusDetailInfoBean> busDetailInfosWeb = new ArrayList<BusDetailInfoBean>();
+                //循环遍历jsonArray
+                for (int i = 0 ;i < jsonArray.length();i++){
+                    //获取一条bus的json
+                    JSONObject bus_json = jsonArray.getJSONObject(i);
 
                     BusDetailInfoBean busDetailInfo = new BusDetailInfoBean();
                     busDetailInfo.ID = bus_json.getString("ID");
@@ -157,7 +160,14 @@ public class busdetailinfo extends AppCompatActivity {
                     busDetailInfo.StationCName = bus_json.getString("StationCName");
 
                     busDetailInfos.add(busDetailInfo);
+                    if(busDetailInfos.size()>0){
+                        if(busDetailInfos.get(i).equals(busDetailInfo)){
+                            busDetailInfos.set(i,busDetailInfo);
+                        }
+
+                    }
                 }
+                busDetailData.notifyDataSetChanged();
             }
 
         } catch (Exception e) {
