@@ -36,37 +36,40 @@ public class busrountingshow extends AppCompatActivity {
     private Context mContext;
     private Intent intent;
     private String busNum;
-    private int whichShow =0;
+    private int whichShow = 0;
     ArrayList<BusRounte> busData = new ArrayList<BusRounte>();
 
     //创建一个Handler
-    Handler handler = new Handler(){
+    Handler handler = new Handler() {
         public void handleMessage(Message msg) {
-            String list[] = (String[]) msg.obj;
+//            String list[] = (String[]) msg.obj;
             int which = msg.what;
-            String lineNum = list[0];
-            String linename = list[1];
-            String lineroute = list[2];
-            if (which == 1){
-//                TextView tv_busDirectionOppsite = (TextView) findViewById(R.id.tv_busDirectionOppsite);
-//                tv_busDirectionOppsite.setText(linename);
-//                TextView tv_direction = (TextView) findViewById(R.id.tv_direction);
-//                tv_direction.setText(lineroute);
+            if (which == 1) {
+                ListView busListView = (ListView) findViewById(R.id.lv_busWhichChoose);
+                BusAdapter busAdapter = new BusAdapter(mContext, busData);
+                busListView.setAdapter(busAdapter);
+                busListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        BusRounte busRounte = (BusRounte) parent.getItemAtPosition(position);
+                        String buslineID = busRounte.lineID;
+                        intent = new Intent(mContext, busdetailinfo.class);
+                        intent.putExtra("buslineID", buslineID);
+                        intent.putExtra("busNum", busNum);
+                        startActivity(intent);
+                    }
+                });
             } else {
-//                TextView tv_busNameOppsite = (TextView) findViewById(R.id.tv_busNameOppsite);
-//                tv_busNameOppsite.setText(linename);
-//                TextView tv_directionOppsite = (TextView) findViewById(R.id.tv_directionOppsite);
-//                tv_directionOppsite.setText(lineroute);
                 whichShow = 0;
             }
-
-        };
+        }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busrountingshow);
-        mContext =this;
+        mContext = this;
         intent = getIntent();
         busNum = intent.getStringExtra("busNum");
 
@@ -75,7 +78,6 @@ public class busrountingshow extends AppCompatActivity {
         supportActionBar.setTitle("当前行驶的路线是 :" + busNum);//设置ActionBar的标题
         supportActionBar.setHomeButtonEnabled(true);//主键按钮能否可点击
         supportActionBar.setDisplayHomeAsUpEnabled(true);//显示返回图标
-
 
         new Thread(new Runnable() {
             @Override
@@ -89,31 +91,6 @@ public class busrountingshow extends AppCompatActivity {
                 }
             }
         }).start();
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        ListView busListView = (ListView) findViewById(R.id.lv_busWhichChoose);
-
-        BusAdapter busAdapter = new BusAdapter(mContext, busData);
-//        busAdapter.set
-
-        busListView.setAdapter(busAdapter);
-        busListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                BusRounte busRounte = (BusRounte) parent.getItemAtPosition(position);
-                String buslineID = busRounte.lineID;
-                intent=new Intent(mContext,busdetailinfo.class);
-                intent.putExtra("buslineID",buslineID);
-                intent.putExtra("busNum",busNum);
-                startActivity(intent);
-            }
-        });
-
     }
 
     public void getRounteInfo(String busname) throws ParserException, IOException {
@@ -141,34 +118,32 @@ public class busrountingshow extends AppCompatActivity {
                 String buslineID = lineID;
                 String busName = textnode.getFirstChild().getNextSibling().getNextSibling().toPlainTextString();
                 String busDirector = textnode.getLastChild().getPreviousSibling().toPlainTextString();
-                System.out.println("buslineID =" +buslineID + ",busName =" +busName + ",busDirector" + busDirector);
-                LogUtils.w("sss",buslineID);
-                LogUtils.w("sss",busName);
-                LogUtils.w("sss",busDirector);
-                String list[] = {buslineID,busName,busDirector};
+                System.out.println("buslineID =" + buslineID + ",busName =" + busName + ",busDirector" + busDirector);
+                LogUtils.w("sss", buslineID);
+                LogUtils.w("sss", busName);
+                LogUtils.w("sss", busDirector);
+                String list[] = {buslineID, busName, busDirector};
 //                Message msg = Message.obtain();
 //                msg.what = ++ whichShow;//指定msg的code ，在接受的时候可以根据what判断是哪个msg
 //                msg.obj = list;
 //                handler.sendMessage(msg);
-
                 BusRounte busRounte = new BusRounte();
                 busRounte.busName = busName;
                 busRounte.lineID = buslineID;
                 busRounte.busDirector = busDirector;
-
                 busData.add(busRounte);
-
             }
+            handler.sendEmptyMessage(1);
         }
 
     }
 
-
-    class BusAdapter extends BaseAdapter{
+    class BusAdapter extends BaseAdapter {
 
         private Context context;
-        private  ArrayList<BusRounte> list;
-        BusAdapter(Context mContent , ArrayList<BusRounte> list){
+        private ArrayList<BusRounte> list;
+
+        BusAdapter(Context mContent, ArrayList<BusRounte> list) {
             this.context = mContext;
             this.list = list;
         }
@@ -196,19 +171,12 @@ public class busrountingshow extends AppCompatActivity {
             } else {
                 view = inflate(context, R.layout.activity_whichroutechoose, null);
             }
-//            CheckBox cb_id = (CheckBox) view.findViewById(R.id.cb_id);
-//            busRounte.busName = busName;
-//            busRounte.lineID = buslineID;
-//            busRounte.busDirector = busDirector;
             BusRounte busRounteInfo = list.get(position);
-           TextView busName = (TextView) view.findViewById(R.id.item_tv_title);
+            TextView busName = (TextView) view.findViewById(R.id.item_tv_title);
             busName.setText(busRounteInfo.busName);
             busName.setTag(busRounteInfo.lineID);
-           TextView busDirector = (TextView) view.findViewById(R.id.item_tv_des);
-//           TextView busDirector = (TextView) view.findViewById(R.id.item_tv_des);
-//           busDirector.setText(busRounteInfo.busDirector);
-           busDirector.setText((busRounteInfo.busDirector).replace("\r\n", "").trim());
-
+            TextView busDirector = (TextView) view.findViewById(R.id.item_tv_des);
+            busDirector.setText((busRounteInfo.busDirector).replace("\r\n", "").trim());
             return view;
         }
     }

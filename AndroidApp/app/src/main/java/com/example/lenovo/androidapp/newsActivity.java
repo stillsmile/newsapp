@@ -121,7 +121,6 @@ public class newsActivity extends AppCompatActivity implements AdapterView.OnIte
 //                    allNews.clear();
 //                    allNews.addAll(allNewsTest);
                     if(allNewsTest != null){
-
                         allNews.clear();
                         allNews.addAll(allNewsTest);
                         newsAdapter.list = allNews;

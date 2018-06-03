@@ -23,7 +23,7 @@ import static android.view.View.inflate;
 public class BusDetailAdapter extends BaseAdapter {
 
     private Context context;
-    ArrayList<BusDetailInfoBean> list;
+    public ArrayList<BusDetailInfoBean> list;
     public BusDetailAdapter(Context context, ArrayList<BusDetailInfoBean> list){
         this.context = context;
         this.list = list;
