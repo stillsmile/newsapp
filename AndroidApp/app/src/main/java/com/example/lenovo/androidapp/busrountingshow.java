@@ -8,11 +8,8 @@ import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.htmlparser.Node;
 import org.htmlparser.Parser;
@@ -26,10 +23,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import Adapter.BusAdapter;
 import bean.BusRounte;
 import utils.LogUtils;
-
-import static android.view.View.inflate;
 
 public class busrountingshow extends AppCompatActivity {
 
@@ -138,48 +134,48 @@ public class busrountingshow extends AppCompatActivity {
 
     }
 
-    class BusAdapter extends BaseAdapter {
-
-        private Context context;
-        private ArrayList<BusRounte> list;
-
-        BusAdapter(Context mContent, ArrayList<BusRounte> list) {
-            this.context = mContext;
-            this.list = list;
-        }
-
-        @Override
-        public int getCount() {
-            return list.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return list.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = null;
-            if (convertView != null) {
-                view = convertView;
-            } else {
-                view = inflate(context, R.layout.activity_whichroutechoose, null);
-            }
-            BusRounte busRounteInfo = list.get(position);
-            TextView busName = (TextView) view.findViewById(R.id.item_tv_title);
-            busName.setText(busRounteInfo.busName);
-            busName.setTag(busRounteInfo.lineID);
-            TextView busDirector = (TextView) view.findViewById(R.id.item_tv_des);
-            busDirector.setText((busRounteInfo.busDirector).replace("\r\n", "").trim());
-            return view;
-        }
-    }
+//    class BusAdapter extends BaseAdapter {
+//
+//        private Context context;
+//        private ArrayList<BusRounte> list;
+//
+//        BusAdapter(Context mContent, ArrayList<BusRounte> list) {
+//            this.context = mContext;
+//            this.list = list;
+//        }
+//
+//        @Override
+//        public int getCount() {
+//            return list.size();
+//        }
+//
+//        @Override
+//        public Object getItem(int position) {
+//            return list.get(position);
+//        }
+//
+//        @Override
+//        public long getItemId(int position) {
+//            return position;
+//        }
+//
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            View view = null;
+//            if (convertView != null) {
+//                view = convertView;
+//            } else {
+//                view = inflate(context, R.layout.activity_whichroutechoose, null);
+//            }
+//            BusRounte busRounteInfo = list.get(position);
+//            TextView busName = (TextView) view.findViewById(R.id.item_tv_title);
+//            busName.setText(busRounteInfo.busName);
+//            busName.setTag(busRounteInfo.lineID);
+//            TextView busDirector = (TextView) view.findViewById(R.id.item_tv_des);
+//            busDirector.setText((busRounteInfo.busDirector).replace("\r\n", "").trim());
+//            return view;
+//        }
+//    }
 
     //添加返回的事件  同上一个activity的返回方法
     @Override

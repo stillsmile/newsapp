@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import Adapter.BusDetailAdapter;
 import bean.BusDetailInfoBean;
+import utils.LogUtils;
 import utils.StreamUtils;
 
 public class busdetailinfo extends AppCompatActivity {
@@ -104,15 +105,17 @@ public class busdetailinfo extends AppCompatActivity {
                 getbusData(buslineID);
             }
         }).start();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(500);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
-        ListView listView = (ListView) findViewById(R.id.lv_busDataInfo);
-        busDetailData = new BusDetailAdapter(mContext, busDetailInfos);
-        listView.setAdapter(busDetailData);
+        if(busDetailInfos != null){
+            ListView listView = (ListView) findViewById(R.id.lv_busDataInfo);
+            busDetailData = new BusDetailAdapter(mContext, busDetailInfos);
+            listView.setAdapter(busDetailData);
+        }
 
 
 //        开始计时
@@ -203,5 +206,11 @@ public class busdetailinfo extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        System.out.println("点击退回触发");
+        LogUtils.w("sss","");
+        handler.removeCallbacks(runnable);
+    }
 }
