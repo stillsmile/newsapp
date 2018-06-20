@@ -26,9 +26,6 @@
         <activity android:name=".busrountingshow" />
         <activity android:name=".busdetailinfo"
             android:label="@string/action_测试1">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".busrountingshow" />
         </activity>
         <activity android:name=".busqueryInfo">
             <intent-filter>

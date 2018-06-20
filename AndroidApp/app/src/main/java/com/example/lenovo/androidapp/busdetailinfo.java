@@ -1,7 +1,9 @@
 package com.example.lenovo.androidapp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,6 +32,7 @@ import java.util.ArrayList;
 
 import Adapter.BusDetailAdapter;
 import bean.BusDetailInfoBean;
+import dao.CollectionDataHelper;
 import utils.LogUtils;
 import utils.StreamUtils;
 
@@ -89,7 +94,6 @@ public class busdetailinfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busdetailinfo);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
         mContext = this;
         intent = getIntent();
         buslineID = intent.getStringExtra("buslineID");
@@ -108,17 +112,32 @@ public class busdetailinfo extends AppCompatActivity {
                 getbusData(buslineID);
             }
         }).start();
-//        try {
-//            Thread.sleep(500);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
 
         if(busDetailInfos != null){
             ListView listView = (ListView) findViewById(R.id.lv_busDataInfo);
             busDetailData = new BusDetailAdapter(mContext, busDetailInfos);
             listView.setAdapter(busDetailData);
         }
+        Button bt_collection = (Button) findViewById(R.id.bt_collection);
+        bt_collection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                SharedPreferences.Editor edit = getSharedPreferences("collectionData",0).edit();
+//                edit.putString("buslineID","");
+//                edit.putString("busNum","");
+//                edit.commit();
+                CollectionDataHelper collectionDataHelper = new CollectionDataHelper(mContext);
+                SQLiteDatabase db = collectionDataHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put("buslineiD",buslineID);
+                values.put("busnum",busNum);
+                values.put("isShow",1);
+
+                long insert = db.insert("CollectionData",null,values);
+                Toast.makeText(mContext,"  " +insert ,Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
 //        开始计时
@@ -222,11 +241,5 @@ public class busdetailinfo extends AppCompatActivity {
         System.out.println("点击退回触发");
         LogUtils.w("sss","");
         handler.removeCallbacks(runnable);
-    }
-
-    @Override
-    protected void onDestroy() {
-        handler.removeCallbacks(runnable);
-        super.onDestroy();
     }
 }
