@@ -4,6 +4,9 @@
     //读写内存目录权限
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +23,6 @@
         </activity>
         <activity android:name=".newsActivity" />
         <activity android:name=".databaseOperation" />
-        <activity android:name=".busqueryInfo" />
         <activity android:name=".busrountingshow" />
         <activity android:name=".busdetailinfo"
             android:label="@string/action_测试1">
@@ -28,8 +30,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".busrountingshow" />
         </activity>
+        <activity android:name=".busqueryInfo">
+            <intent-filter>
+                <action android:name="android.intent.action.busquery" />
+
+                <data android:scheme="buslineNum" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".newsTestActivity" />
-        <activity android:name=".listViewShuaxin"></activity>
+        <activity android:name=".listViewShuaxin" />
+        <activity android:name=".MesgActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.mesgDataTest" />
+
+                <data android:scheme="testData" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".DefineMessgActivity" />
+        <activity android:name=".ContactActivity" />
+        <activity android:name=".SmsTemplateActivity" />
     </application>
 
 </manifest>

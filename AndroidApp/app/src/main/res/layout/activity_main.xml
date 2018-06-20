@@ -35,6 +35,7 @@
             android:id="@+id/bt_busHelper"
             android:layout_weight="1" />
     </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -42,28 +43,45 @@
 
 
         <Button
-            android:text="测试数据"
+            android:text="fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bt_newtestr"
+            android:id="@+id/bt_fragment"
             android:layout_weight="1" />
 
         <Button
-            android:text="listview刷新"
+            android:text="list刷新"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bt_listviewshuxin"
             android:layout_weight="1" />
 
         <Button
-            android:text=""
+            android:text="隐示意图测试"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/newtest2"
+            android:id="@+id/bt_hideIntent"
             android:layout_weight="1" />
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="短信大全"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/bt_mesgShow" />
 
+        <Button
+            android:text="短信案例"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/bt_DefineMessg" />
+        </LinearLayout>
 
 
 

@@ -6,6 +6,7 @@
     <string name="action_测试1">测试菜单1</string>
     <string name="action_测试2">测试菜单2</string>
     <string name="action_测试3">测试菜单3</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
