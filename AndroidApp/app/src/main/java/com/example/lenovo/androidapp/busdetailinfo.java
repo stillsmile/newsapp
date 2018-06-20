@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -87,6 +89,7 @@ public class busdetailinfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busdetailinfo);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         mContext = this;
         intent = getIntent();
         buslineID = intent.getStringExtra("buslineID");
@@ -207,10 +210,23 @@ public class busdetailinfo extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = new MenuInflater(this);
+        menuInflater.inflate(R.menu.main,menu);
+        return true;
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         System.out.println("点击退回触发");
         LogUtils.w("sss","");
         handler.removeCallbacks(runnable);
+    }
+
+    @Override
+    protected void onDestroy() {
+        handler.removeCallbacks(runnable);
+        super.onDestroy();
     }
 }

@@ -22,7 +22,12 @@
         <activity android:name=".databaseOperation" />
         <activity android:name=".busqueryInfo" />
         <activity android:name=".busrountingshow" />
-        <activity android:name=".busdetailinfo" />
+        <activity android:name=".busdetailinfo"
+            android:label="@string/action_测试1">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".busrountingshow" />
+        </activity>
         <activity android:name=".newsTestActivity" />
         <activity android:name=".listViewShuaxin"></activity>
     </application>

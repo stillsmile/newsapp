@@ -3,6 +3,9 @@
     <item name="cb_id" type="id"></item>
     <item name="tag_test" type="id"></item>
     <string name="action_settings">Settings</string>
+    <string name="action_测试1">测试菜单1</string>
+    <string name="action_测试2">测试菜单2</string>
+    <string name="action_测试3">测试菜单3</string>
 
 
 </resources>
