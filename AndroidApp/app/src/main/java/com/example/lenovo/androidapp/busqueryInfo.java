@@ -2,6 +2,7 @@ package com.example.lenovo.androidapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -67,6 +68,8 @@ public class busqueryInfo extends AppCompatActivity{
             }
         });
 
+        SharedPreferences.Editor edt = (SharedPreferences.Editor) getSharedPreferences("collectionData",0);
+        //通过Editor对象操作数据库
 
 
     }
