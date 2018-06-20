@@ -14,34 +14,34 @@
         android:layout_weight="9"
         android:layout_height="0dp" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <Toolbar
+        android:layout_width="wrap_content"
         android:layout_weight="1"
-        android:layout_height="0dp">
-        <Button
-            android:text="首页"
-            android:id="@+id/bt_homePage"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <Button
-            android:text="收藏"
-            android:id="@+id/bt_collection"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <Button
-            android:text="反向"
-            android:id="@+id/bt_reverse"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <Button
-            android:text="刷新"
-            android:id="@+id/bt_refresh"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        android:elevation="4dp">
+         <Button
+             android:text="首页"
+             android:id="@+id/bt_homePage"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <Button
+             android:text="收藏"
+             android:id="@+id/bt_collection"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <Button
+             android:text="反向"
+             android:id="@+id/bt_reverse"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <Button
+             android:text="刷新"
+             android:id="@+id/bt_refresh"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
 
-    </LinearLayout>
+
+
+    </Toolbar>
+
 </LinearLayout>
