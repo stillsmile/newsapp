@@ -13,5 +13,14 @@ public class BusDetailInfoBean {
     public String OutTime;//出站时间
     public String StationCName;//站台名称
 
-
+    public BusDetailInfoBean() {
+    }
+    public BusDetailInfoBean(String ID, String busInfo, String code, String inTime, String outTime, String stationCName) {
+        this.ID = ID;
+        BusInfo = busInfo;
+        Code = code;
+        InTime = inTime;
+        OutTime = outTime;
+        StationCName = stationCName;
+    }
 }

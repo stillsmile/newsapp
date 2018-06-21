@@ -15,18 +15,19 @@ public class CollectionDataHelper extends SQLiteOpenHelper {
 
 
     public CollectionDataHelper(Context context) {
-        super(context, "CollectionData.db", null, 1);
+        super(context, "businfodb.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql ="create table CollectionData " +
+        String sql ="create table businfodb " +
                             "(_id integer  ," +
-                            "buslineiD varchar(200)," +
+                            "buslineid varchar(200)," +
                             "busnum varchar(300)," +
-                            "isShow integer)";
+                            "busdirector varchar(300)," +
+                            "isshow integer)";
         db.execSQL(sql);
-        LogUtils.w("sss","数据库创建成功");
+        LogUtils.w("ceshi","数据库创建成功");
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.lenovo.androidapp;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,6 +43,7 @@ public class busdetailinfo extends AppCompatActivity {
     private Intent intent;
     private String buslineID;
     private String busNum;
+    private String busDirector;
     private ActionBar supportActionBar;
     private BusDetailAdapter busDetailData;
     private ArrayList<BusDetailInfoBean> busDetailInfos;
@@ -59,7 +61,7 @@ public class busdetailinfo extends AppCompatActivity {
                 busDetailInfos.addAll(busDetailInfosWeb);
                 busDetailData.list = busDetailInfos;
                 busDetailData.notifyDataSetChanged();
-                Toast.makeText(mContext,"allNewsTest  = " +busDetailInfos.size() ,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext,"allNewsTest  = " +busDetailInfos.size() ,Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -98,6 +100,9 @@ public class busdetailinfo extends AppCompatActivity {
         intent = getIntent();
         buslineID = intent.getStringExtra("buslineID");
         busNum = intent.getStringExtra("busNum");
+        busDirector = intent.getStringExtra("busDirector");
+
+//        intent.putExtra("busDirector", busDirector);
 
         supportActionBar = getSupportActionBar();
         supportActionBar.setIcon(R.drawable.bus);//设置ActionBar的icon图标
@@ -113,29 +118,37 @@ public class busdetailinfo extends AppCompatActivity {
             }
         }).start();
 
-        if(busDetailInfos != null){
-            ListView listView = (ListView) findViewById(R.id.lv_busDataInfo);
+        ListView listView = (ListView) findViewById(R.id.lv_busDataInfo);
+        if(busDetailInfos != null &&busDetailInfos.size()>0){
             busDetailData = new BusDetailAdapter(mContext, busDetailInfos);
             listView.setAdapter(busDetailData);
+        }else{
+            ArrayList<BusDetailInfoBean>  NullbusDetailInfos =  new ArrayList<BusDetailInfoBean>();
+            BusDetailInfoBean busDetailInfoBean = new BusDetailInfoBean("","","","","","");
+            NullbusDetailInfos.add(busDetailInfoBean);
+            busDetailData = new BusDetailAdapter(mContext, NullbusDetailInfos);
+            listView.setAdapter(busDetailData);
         }
+
+
         Button bt_collection = (Button) findViewById(R.id.bt_collection);
         bt_collection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                SharedPreferences.Editor edit = getSharedPreferences("collectionData",0).edit();
-//                edit.putString("buslineID","");
-//                edit.putString("busNum","");
-//                edit.commit();
                 CollectionDataHelper collectionDataHelper = new CollectionDataHelper(mContext);
                 SQLiteDatabase db = collectionDataHelper.getWritableDatabase();
                 ContentValues values = new ContentValues();
                 values.put("buslineiD",buslineID);
-                values.put("busnum",busNum);
+                values.put("busnum", busNum + "公交车");
+                values.put("busdirector", busDirector);
                 values.put("isShow",1);
-
-                long insert = db.insert("CollectionData",null,values);
-                Toast.makeText(mContext,"  " +insert ,Toast.LENGTH_SHORT).show();
-
+                Cursor querycursor = db.query("businfodb", null, "buslineiD=?", new String[]{buslineID}, null, null, null);
+                if(querycursor != null && querycursor.getCount() >0){//判断cursor中是否存在数据
+                    Toast.makeText(mContext,"已收藏" ,Toast.LENGTH_SHORT).show();
+                }else{
+                    long insert = db.insert("businfodb",null,values);
+                    Toast.makeText(mContext,"收藏成功" ,Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

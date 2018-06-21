@@ -49,9 +49,11 @@ public class busrountingshow extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         BusRounte busRounte = (BusRounte) parent.getItemAtPosition(position);
                         String buslineID = busRounte.lineID;
+                        String busDirector = busRounte.busDirector;
                         intent = new Intent(mContext, busdetailinfo.class);
                         intent.putExtra("buslineID", buslineID);
                         intent.putExtra("busNum", busNum);
+                        intent.putExtra("busDirector", busDirector);
                         startActivity(intent);
                     }
                 });

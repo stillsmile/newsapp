@@ -49,14 +49,12 @@ public class collectionDataBAdapter extends BaseAdapter {
             view = View.inflate(context, R.layout.buscollectiondatashow ,null);
         }
         CollectionDataBean collectionDataBean = list.get(position);
-        TextView tv_id = (TextView) view.findViewById(R.id.tv_id);
         TextView tv_buslineiD = (TextView) view.findViewById(R.id.tv_buslineiD);
         TextView tv_busnum = (TextView) view.findViewById(R.id.tv_busnum);
         TextView tv_collectionShow = (TextView) view.findViewById(R.id.tv_collectionShow);
-        tv_id.setText(collectionDataBean.id);
-        tv_buslineiD.setText(collectionDataBean.buslineiD);
+        tv_buslineiD.setText((collectionDataBean.busDirector).replace("\r\n", "").trim());
         tv_busnum.setText(collectionDataBean.busnum);
-        tv_collectionShow.setText(collectionDataBean.isShow);
+        tv_collectionShow.setText(String.valueOf(collectionDataBean.isShow));
 
         return view;
     }

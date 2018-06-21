@@ -8,5 +8,6 @@ public class CollectionDataBean {
     public int id;
     public String buslineiD;
     public String busnum;
+    public String busDirector;
     public int isShow;
 }
